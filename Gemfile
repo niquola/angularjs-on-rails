@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'sqlite3'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'

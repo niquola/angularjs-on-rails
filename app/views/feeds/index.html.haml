@@ -1,0 +1,8 @@
+%div(ng-controller="FeedsCnt")
+  %h1 Feeds
+  %ul
+    %li(ng-repeat="item in items")
+      %a(href="/feeds/{{item.id}}") {{item.name}}
+  = simple_form_for :feed do |f|
+    = f.input :name
+    = f.submit(class: 'btn')
