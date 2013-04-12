@@ -7,9 +7,9 @@ module AngularRoutes
     @resources = []
   end
 
-  def ng_resources(name)
+  def ng_resources(name, *args, &block)
     AngularRoutes.resources<< name
-    self.resources(name)
+    self.resources(name, *args, &block)
   end
 
   def ng_resource(name)
@@ -22,6 +22,8 @@ AngularRoutes.clear
 AngularOnRails::Application.routes.draw do
   self.extend(AngularRoutes)
 
-  ng_resources :feeds
+  ng_resources :feeds do
+    collection { get :preview }
+  end
   root :to => 'feeds#index'
 end

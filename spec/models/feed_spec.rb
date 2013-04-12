@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Feed do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should init new" do
+    @feed = Feed.preview('http://feeds2.feedburner.com/Rubyflow')
+    p @feed
+  end
+
 end

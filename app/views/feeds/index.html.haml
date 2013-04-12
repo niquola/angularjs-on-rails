@@ -1,7 +1,22 @@
-%div(ng-controller="FeedsCnt")
-  %h1
-    Feeds
-    = link_to('New', '/feeds/new', {class: 'btn'})
-  %ul
-    %li(ng-repeat="item in items")
-      %a(href="/feeds/{{item.id}}") {{item.name}}
+.row(ng-controller="FeedsCnt")
+  .span9
+    %form(ng-submit="preview()")
+      %input(type="text" ng-model="search" style="width:50em;")
+    %hr
+    %b(ng-show="loading") Loading...
+    %form(ng-submit="addFeed()")
+      %h3
+        {{feed.title}} {{feed.url}}
+      %p(ng-show="feed.description") {{feed.description}}
+      %button.btn.btn-primary Add Feed
+      %button.btn Cancel
+    %hr
+    .entry(ng-repeat="entry in feed.entries")
+      %h5(ng-click="entry.active = true")
+        {{entry.title}}
+        %small {{entry.published | date}}
+      %p(ng-bind-html-unsafe="entry.summary")
+  .span3
+    %ul.nav
+      %li(ng-repeat="item in items")
+        %a(ng-click="setFeed(item)") {{item.name}}

@@ -9,6 +9,11 @@ class FeedsController < ApplicationController
     respond_with(@feed)
   end
 
+  def preview
+    @feed = Feed.preview(params[:url])
+    respond_with(@feed)
+  end
+
   def create
     @feed = Feed.create(params[:feed])
     respond_with(@feed)
