@@ -13,9 +13,9 @@
     %hr
     .entry(ng-repeat="entry in feed.entries")
       %h5(ng-click="entry.active = true")
-        {{entry.title}}
         %small {{entry.published | date}}
-      %p(ng-bind-html-unsafe="entry.summary")
+        {{entry.title}}
+      %p(ng-bind-html-unsafe="entry.summary" style="margin-left:5em;")
   .span3
     %ul.nav
       %li(ng-repeat="item in items")
