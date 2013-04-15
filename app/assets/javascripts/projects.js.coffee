@@ -11,20 +11,20 @@ window.myapp.factory 'Project', ($resource)->
     'preview': {method:'GET', params: {collection: 'preview'}},
     'delete': {method:'DELETE'}
 
-window.ProjectsCnt = ($scope, Project)->
+window.myapp.controller 'ProjectsCnt', ($state, $scope, Project)->
   $scope.projects = Project.query()
 
-window.ProjectCnt = ($scope, $routeParams, $rootScope, Project)->
-  $rootScope.project = Project.get id: $routeParams.id
+window.myapp.controller 'ProjectCnt', ($state, $scope, Project)->
+  $scope.project = Project.get id: $state.params.id
 
-window.ProjectFormCnt = ($scope, $location, $routeParams, Project)->
-  $scope.project = Project.get(id: $routeParams.id) if $routeParams.id
+window.myapp.controller 'ProjectFormCnt', ($scope, $state, Project)->
+  $scope.project = Project.get(id: $state.params.id) if $state.params.id
   $scope.submit = ()->
     if $scope.project
       $scope.project.$save ->
-        $location.path("/projects")
+        $state.transitionTo('projects/:id', id: $scope.project.id)
     else
-      Project.create $scope.project, ->
-        $location.path("/projects")
+      Project.create $scope.project, (data)->
+        $state.transitionTo('projects/:id', id: data.id)
 
 

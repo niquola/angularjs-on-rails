@@ -1,12 +1,12 @@
 = simple_form_for :project,
-  html: { class: 'form form-horizontal well',
-    'ng-controller'=> "ProjectFormCnt",
+  html: { class: 'form form-horizontal',
     'ng-submit'=>'submit()',
     onsubmit: 'return false' } do |f|
   = f.error_notification
-  .form-inputs
-    = f.input :name, input_html: {'ng-model'=>'project.name'}
-    = f.input :description, input_html: {'ng-model'=>'project.description'}
-
+  = f.input :name, input_html: {'ng-model'=>'project.name'}
+  = f.input :description,
+    as: :text,
+    input_html: {'ng-model'=>'project.description', style: 'height: 200px;', class: 'xlarge'}
   .form-actions
     = f.button :submit
+    = link_to 'Cancel', '/projects'

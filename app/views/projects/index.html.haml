@@ -1,8 +1,7 @@
-.projects(ng-controller="ProjectsCnt")
-  %h3
-    Projects
-    %small= link_to 'New Project', new_project_path, class: 'btn btn-primary'
-  %ul.nav.nav-list
-    %li(ng-repeat="project in projects")
-      %a(href="/projects/{{project.id}}") {{project.name}}
+%h3
+  Projects
+  %small= link_to 'New Project', new_project_path, class: 'btn btn-primary'
+%ul.nav.nav-list
+  %li(ng-repeat="project in projects")
+    %a(href="/projects/{{project.id}}") {{project.name}}
 

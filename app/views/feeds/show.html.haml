@@ -1,2 +1,22 @@
-%h1 Feeds#show
-%p Find me in app/views/feeds/show.html.haml
+%form(ng-submit="preview()" )
+  %input(type="text" ng-model="search" style="width:50em;")
+%hr
+%b(ng-show="loading") {{loading}}
+
+%form(ng-submit="addFeed()" ng-show="isPreview")
+  %h3
+    {{feed.title}} {{feed.url}}
+  %p(ng-show="feed.description") {{feed.description}}
+  %button.btn.btn-primary Add Feed
+  %button.btn Cancel
+
+%div(ng-show="!isPreview && feed")
+  %button.pull-right.btn.btn-danger(ng-click="removeFeed()") Remove
+  %h3 {{feed.title}} {{feed.url}}
+  %p {{feed.description}}
+%hr
+.entry(ng-repeat="entry in feed.entries")
+  %h5(ng-click="entry.active = true")
+    {{entry.title}}
+    %small {{entry.published | date}}
+  %p.details(ng-bind-html-unsafe="entry.summary")

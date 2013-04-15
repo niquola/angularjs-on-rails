@@ -10,6 +10,17 @@ window.FeedsCnt = ($scope, $http, $resource)->
 
   $scope.feeds = feeds.query()
 
+window.FeedCnt = ($scope, $http, $resource, $state)->
+  console.log($state)
+  feeds = $resource '/feeds/:collection:id/:member',{id: '@id', collection: '@collection', member: '@member', format: 'json'},
+    'get':    {method:'GET'},
+    'save':   {method:'POST'},
+    'query':  {method:'GET', isArray:true},
+    'preview': {method:'GET', params: {collection: 'preview'}},
+    'delete': {method:'DELETE'}
+
+  $scope.feed = feeds.get(id: $state.params.id)
+
   $scope.preview = ()->
     $scope.loading = 'Loading preview...'
     params = {url: $scope.search}

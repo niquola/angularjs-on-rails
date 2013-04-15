@@ -6,16 +6,7 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title= content_for?(:title) ? yield(:title) : "Angulator"
     = csrf_meta_tags
-    / Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-    %link{:href => "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css", :rel => "stylesheet"}/
     = stylesheet_link_tag "application", :media => "all"
-    %link(href="/images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
-    %link(href="/images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
-    %link(href="/images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
-    %link(href="/images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
-    %link(href="/favicon.ico" rel="shortcut icon")
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
@@ -27,14 +18,11 @@
           %a.brand(href="#") Feedo
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Nav", "#"
               %li= link_to "Projects", "/projects"
-
+              %li= link_to "Feeds", "/feeds"
     .container
-      %div
-        %div{'ng-view'=>''}
-
-    %script{:src => "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.js"}
-    %script{:src => "//code.angularjs.org/1.1.4/angular.js"}
-    %script{:src => "//code.angularjs.org/1.1.4/angular-resource.js"}
+      .row
+        .span9(ui-view='')
+        .span3
+          .well(ui-view='side')
     = javascript_include_tag "application"

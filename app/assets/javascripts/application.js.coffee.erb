@@ -11,29 +11,68 @@
 # GO AFTER THE REQUIRES BELOW.
 #
 #= require jquery
-#= require jquery_ujs
+#= require bootstrap
+#= require angular
+#= require angular-ui
+#= require angular-ui-states
+#= require angular-resource
 #= require_self
 #= require_tree .
-window.myapp = angular.module 'myapp', ['ngResource'], ($routeProvider, $locationProvider)->
-  resources = (name)->
-    $routeProvider.when "/#{name}/",
-      templateUrl: "/#{name}.tpl"
 
-    $routeProvider.when "/#{name}/:id/edit",
-      templateUrl: "/#{name}/0/edit.tpl"
+window.myapp = angular
+  .module 'myapp',['ui.compat','ui.router', 'ngResource'], ($stateProvider ,$locationProvider, $urlRouterProvider)->
+    $stateProvider
+      .state 'feeds',
+        url: '/feeds'
+        views:
+          'side':
+            controller: 'FeedsCnt'
+            templateUrl: '/feeds.tpl'
+      .state 'feeds/:id',
+        url: '/feeds/:id'
+        views:
+          'side':
+            controller: 'FeedsCnt'
+            templateUrl: '/feeds.tpl'
+          '':
+            controller: 'FeedCnt'
+            templateUrl: '/feeds/0.tpl'
+      .state 'projects',
+        url: '/projects'
+        views:
+          '':
+            controller: 'ProjectsCnt'
+            templateUrl: '/projects.tpl'
+      .state 'projects/new',
+        url: '/projects/new',
+        views:
+          'side':
+            controller: 'ProjectsCnt'
+            templateUrl: '/projects.tpl'
+          '':
+            controller: 'ProjectFormCnt'
+            templateUrl: '/projects/new.tpl'
+      .state 'projects/:id',
+        url: '/projects/:id',
+        views:
+          'side':
+            controller: 'ProjectsCnt'
+            templateUrl: '/projects.tpl'
+          '':
+            controller: 'ProjectCnt'
+            templateUrl: '/projects/0.tpl'
+      .state 'projects/:id/edit',
+        url: '/projects/:id/edit',
+        views:
+          'side':
+            controller: 'ProjectsCnt'
+            templateUrl: '/projects.tpl'
+          '':
+            controller: 'ProjectFormCnt'
+            templateUrl: '/projects/0/edit.tpl'
 
-    $routeProvider.when "/#{name}/new",
-      templateUrl: "/#{name}/new.tpl"
+    $locationProvider.html5Mode(true)
 
-    $routeProvider.when "/#{name}/:id",
-      templateUrl: "/#{name}/0.tpl"
-
-
-  <% AngularRoutes.resources.each do |res| %>
-  resources '<%= res %>'
-  <% end %>
-
-  $routeProvider.when "/",
-    templateUrl: "/feeds.tpl"
-
-  $locationProvider.html5Mode(true)
+  .run ($rootScope,   $state,   $stateParams)->
+    $rootScope.$state = $state
+    $rootScope.$stateParams = $stateParams
