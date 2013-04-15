@@ -1,43 +1,47 @@
-window.FeedsCnt = ($scope, $http)->
-  itemsUrl = "/feeds.json"
-  $scope.feedsLoading = false
-  $scope.load = ()->
-    return if $scope.loading
-    $scope.loading = true
-    params = {}
-    $http.get(itemsUrl, params: params).success (data)->
-       $scope.feedsLoading = false
-       angular.extend($scope, data)
-  $scope.load()
+window.FeedsCnt = ($scope, $http, $resource)->
+  feeds = $resource '/feeds/:collection:id/:member',{id: '@id', collection: '@collection', member: '@member', format: 'json'},
+    'get':    {method:'GET'},
+    'save':   {method:'POST'},
+    'query':  {method:'GET', isArray:true},
+    'preview': {method:'GET', params: {collection: 'preview'}},
+    'delete': {method:'DELETE'}
+
   $scope.search = 'http://feeds2.feedburner.com/Rubyflow'
+
+  $scope.feeds = feeds.query()
+
   $scope.preview = ()->
+    $scope.loading = 'Loading preview...'
     params = {url: $scope.search}
-    $scope.feedsLoading = true
-    $http.get('/feeds/preview.json', params: params)
-      .success (data)->
-        $scope.validPreview = true
-        $scope.feedsLoading = false
-        $scope.feed = data
-        console.log(data)
-
-  $scope.loading = false
-  $scope.setFeed =(item)->
-    $scope.loading = true
-    $scope.currentFeed = item
-    $http.get("/feeds/#{item.id}.json").success (data)->
-      $scope.news = data.news
+    $scope.feed = feeds.preview params, ->
+      $scope.isPreview = true
       $scope.loading = false
-      console.log(data.news)
 
-window.FeedsFormCnt = ($scope, $http, $location)->
-  $scope.newFeed = {name: 'Test', url: 'https://github.com/patcito/angularjs_scaffold'}
-  $scope.create = ()->
-    $scope.progress = true
-    $http.post("/feeds.json", feed: $scope.newFeed)
+  $scope.addFeed = ()->
+    $scope.loading = 'Saving feed...'
+    params = {url: $scope.feed.feed_url}
+    $http.post('/feeds.json', params)
       .success (data)->
-        $scope.progress = false
-        $scope.items.push(data)
-        $scope.newFeed = {}
-        $location.path("/feeds")
-      .error (err)->
-        consoloe.log(arguments)
+        $scope.isPreview = false
+        $scope.loading = false
+        $scope.feed = data
+        $scope.feeds.push(data)
+
+  $scope.removeFeed = ()->
+    $scope.loading = 'Removing feed...'
+    $scope.feed.$delete ->
+      $scope.loading = false
+      $scope.feed = null
+
+  $scope.setFeed = (feed)->
+    $scope.isPreview = false
+    $scope.feed.active = null if $scope.feed
+    $scope.feed = feed
+    $scope.feed.active = 'active'
+    return if feed.entries
+    $http.get("/feeds/#{feed.id}.json")
+      .success (data)->
+        $scope.loading = false
+        $scope.feed.entries = data.entries
+
+  #helpers

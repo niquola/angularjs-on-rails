@@ -28,13 +28,13 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to "Nav", "#"
+              %li= link_to "Projects", "/projects"
 
     .container
       %div
         %div{'ng-view'=>''}
-      %footer
-        %p &copy; Company 2013
 
-    %script{:src => "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"}
-    %script{:src => "//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"}
+    %script{:src => "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.js"}
+    %script{:src => "//code.angularjs.org/1.1.4/angular.js"}
+    %script{:src => "//code.angularjs.org/1.1.4/angular-resource.js"}
     = javascript_include_tag "application"

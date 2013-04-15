@@ -20,10 +20,18 @@ end
 AngularRoutes.clear
 
 AngularOnRails::Application.routes.draw do
+
+
   self.extend(AngularRoutes)
 
   ng_resources :feeds do
     collection { get :preview }
+    resources :entries
   end
+
+  ng_resources :projects
+
+  resources :entries
+
   root :to => 'feeds#index'
 end

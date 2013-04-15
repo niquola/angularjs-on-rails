@@ -1,0 +1,12 @@
+= simple_form_for :project,
+  html: { class: 'form form-horizontal well',
+    'ng-controller'=> "ProjectFormCnt",
+    'ng-submit'=>'submit()',
+    onsubmit: 'return false' } do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name, input_html: {'ng-model'=>'project.name'}
+    = f.input :description, input_html: {'ng-model'=>'project.description'}
+
+  .form-actions
+    = f.button :submit

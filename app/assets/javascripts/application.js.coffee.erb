@@ -14,7 +14,7 @@
 #= require jquery_ujs
 #= require_self
 #= require_tree .
-window.myapp = angular.module 'myapp', [], ($routeProvider, $locationProvider)->
+window.myapp = angular.module 'myapp', ['ngResource'], ($routeProvider, $locationProvider)->
   resources = (name)->
     $routeProvider.when "/#{name}/",
       templateUrl: "/#{name}.tpl"

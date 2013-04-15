@@ -1,0 +1,7 @@
+.projects(ng-controller="ProjectCnt")
+  %h3 {{project.name}}
+  %p {{project.description}}
+
+  %a(ng-href="/projects/{{project.id}}/edit") Edit
+  \|
+  = link_to 'Back', projects_path
