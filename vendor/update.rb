@@ -4,6 +4,8 @@ code.angularjs.org/1.1.4/angular.js
 code.angularjs.org/1.1.4/angular-resource.js
 raw.github.com/angular-ui/angular-ui/master/build/angular-ui.js
 angular-ui.github.com/ui-router/build/angular-ui-states.js
+raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-0.2.0.js
+raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-0.2.0.js
 ]
 
 css = %w[

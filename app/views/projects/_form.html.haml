@@ -9,4 +9,4 @@
     input_html: {'ng-model'=>'project.description', style: 'height: 200px;', class: 'xlarge'}
   .form-actions
     = f.button :submit
-    = link_to 'Cancel', '/projects'
+    = link_to 'Cancel', "/projects{{project.id && '/' + project.id}}"

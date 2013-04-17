@@ -16,6 +16,9 @@
 #= require angular-ui
 #= require angular-ui-states
 #= require angular-resource
+#= require angular-resource
+#= require ui-bootstrap-0.2.0
+#= require ui-bootstrap-tpls-0.2.0
 #= require_self
 #= require_tree .
 
@@ -27,49 +30,61 @@ window.myapp = angular
         views:
           'side':
             controller: 'FeedsCnt'
-            templateUrl: '/feeds.tpl'
+            templateUrl: '/feeds.ng'
       .state 'feeds/:id',
         url: '/feeds/:id'
         views:
           'side':
             controller: 'FeedsCnt'
-            templateUrl: '/feeds.tpl'
+            templateUrl: '/feeds.ng'
           '':
             controller: 'FeedCnt'
-            templateUrl: '/feeds/0.tpl'
+            templateUrl: '/feeds/show.ng'
       .state 'projects',
         url: '/projects'
         views:
           '':
             controller: 'ProjectsCnt'
-            templateUrl: '/projects.tpl'
+            templateUrl: '/projects.ng'
       .state 'projects/new',
         url: '/projects/new',
         views:
           'side':
             controller: 'ProjectsCnt'
-            templateUrl: '/projects.tpl'
+            templateUrl: '/projects.ng'
           '':
             controller: 'ProjectFormCnt'
-            templateUrl: '/projects/new.tpl'
+            templateUrl: '/projects/new.ng'
       .state 'projects/:id',
         url: '/projects/:id',
         views:
           'side':
             controller: 'ProjectsCnt'
-            templateUrl: '/projects.tpl'
+            templateUrl: '/projects.ng'
           '':
             controller: 'ProjectCnt'
-            templateUrl: '/projects/0.tpl'
+            templateUrl: '/projects/show.ng'
       .state 'projects/:id/edit',
-        url: '/projects/:id/edit',
+        url: '/projects/:id/edit'
         views:
           'side':
             controller: 'ProjectsCnt'
-            templateUrl: '/projects.tpl'
+            templateUrl: '/projects.ng'
           '':
             controller: 'ProjectFormCnt'
-            templateUrl: '/projects/0/edit.tpl'
+            templateUrl: '/projects/edit.ng'
+      .state 'projects/:id/issues',
+        url: '/projects/:id/issues'
+        views:
+          'side':
+            controller: 'ProjectsCnt'
+            templateUrl: '/projects.ng'
+          '':
+            controller: 'ProjectCnt'
+            templateUrl: '/projects/show.ng'
+          'pane':
+            controller: 'IssuesCnt'
+            templateUrl: '/issues.ng'
 
     $locationProvider.html5Mode(true)
 

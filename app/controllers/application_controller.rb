@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
   private
 
   def intercept_html_requests
-    if request.format == Mime::HTML
-      render('layouts/application')
-    elsif params[:format] == 'tpl'
+    if params[:format] == 'ng'
       render("/#{params[:controller]}/#{params[:action]}.html.haml", layout: false)
+    elsif request.format == Mime::HTML
+      render('layouts/application')
     end
   end
 end

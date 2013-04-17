@@ -1,6 +1,6 @@
 %h3
   Projects
-  %small= link_to 'New Project', new_project_path, class: 'btn btn-primary'
+  %small= link_to 'New Project', new_project_path, class: 'btn btn-primary btn-mini'
 %ul.nav.nav-list
   %li(ng-repeat="project in projects")
     %a(href="/projects/{{project.id}}") {{project.name}}

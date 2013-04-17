@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @issue.title
+%p
+  %b Tracker:
+  = @issue.tracker
+%p
+  %b Description:
+  = @issue.description
+
+= link_to 'Edit', edit_issue_path(@issue)
+\|
+= link_to 'Back', issues_path

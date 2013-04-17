@@ -1,6 +1,14 @@
-%h3 {{project.name}}
-%p {{project.description}}
+%h3
+  {{project.name}}
+  %a.btn.btn-mini(ng-href="/projects/{{project.id}}/edit") Edit
+  %small {{project.description}}
 
-%a(ng-href="/projects/{{project.id}}/edit") Edit
-\|
-= link_to 'Back', projects_path
+%ul.nav.nav-tabs
+  %li.active
+    %a(href="/projects/{{project.id}}") Dashboard
+  %li
+    %a(href="/projects/{{project.id}}/issues") Issues
+  %li
+    %a(href="/projects/{{project.id}}/roadmap") Roadmap
+
+.details(ui-view="pane")
