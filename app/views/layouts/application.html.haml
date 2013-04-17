@@ -15,14 +15,9 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") Feedo
+          %a.brand(href="/") Reedmine
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Projects", "/projects"
-              %li= link_to "Feeds", "/feeds"
-    .container
-      .row
-        .span9(ui-view='')
-        .span3
-          .well(ui-view='side')
+              %li= link_to "Projects", projects_path
+    .container(ng-view)
     = javascript_include_tag "application"

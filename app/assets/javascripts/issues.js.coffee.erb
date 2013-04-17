@@ -1,0 +1,10 @@
+<% url = AngularOnRails::Application.routes.url_helpers %>
+
+window.app.controller 'IssuesCnt', ($scope, $routeParams, Project, Issues)->
+  project_id = $routeParams.project_id
+  $scope.project = Project.get(id: project_id)
+  $scope.issues = Issues.query(project_id: project_id)
+
+window.app.controller 'IssueFormCnt', ($scope, $routeParams, Project, Issues)->
+  project_id = $routeParams.project_id
+  $scope.project = Project.get(id: project_id)

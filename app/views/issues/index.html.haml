@@ -1,10 +1,15 @@
-%h1 Listing issues
+= render '/shared/project_tabs'
 
-%table
-  %tr
-    %th Title
-    %th Tracker
-    %th Description
-    %th
-    %th
-    %th
+= link_to 'Add Issue', '/projects/{{project.id}}/issues/new', class: 'button'
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Created at
+      %th Updated at
+  %tr(ng-repeat="issue in issues")
+    %td
+      %a(href="/projects/{{project.id}}/issues/{{issue.id}}") {{issue.name}}
+    %td {{issue.updated_at | date}}
+    %td {{issue.created_at | date}}
+

@@ -1,0 +1,24 @@
+<% url = AngularOnRails::Application.routes.url_helpers %>
+
+window.app.controller 'ProjectsCnt', ($scope, Project)->
+  $scope.projects = Project.query()
+
+window.app.controller 'ProjectDetailsCnt', ($scope, $routeParams, Project)->
+  $scope.project = Project.get(id: $routeParams.id)
+
+window.app.controller 'ProjectFormCnt', ($scope, $routeParams, $location, Project)->
+  $scope.project = Project.get(id: $routeParams.id) if $routeParams.id
+  $scope.submit = ()->
+    project = $scope.project
+    redirect_url = '<%= url.project_path(id: ":id") %>'
+    redirect_url = redirect_url.replace(':id', project.id || '')
+    if project.id
+      project.$save (data)->
+        console.log(data)
+        $location.path(redirect_url, id: project.id)
+    else
+      Project.create project, (data)->
+        console.log(data)
+        $location.path(redirect_url, id: data.id)
+
+

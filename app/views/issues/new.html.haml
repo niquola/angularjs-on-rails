@@ -1,5 +1,6 @@
-%h1 New issue
-
-= render 'form'
-
-= link_to 'Back', issues_path
+.row
+  .span9
+    = render 'shared/project_tabs'
+    %h2 New issue
+    = render 'form'
+  .span3

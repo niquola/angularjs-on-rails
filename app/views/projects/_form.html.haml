@@ -1,10 +1,10 @@
 = simple_form_for :project,
-  html: { class: 'form form-horizontal',
+  html: { class: 'form form-horizontal well',
     'ng-submit'=>'submit()',
     onsubmit: 'return false' } do |f|
   = f.error_notification
-  = f.input :name, input_html: {'ng-model'=>'project.name'}
-  = f.input :description,
+  = f.input :name, input_html: {'ng-model'=>'project.name', class: 'xlarge'}
+  = f.input :description, 'ng-model'=>'project.description',
     as: :text,
     input_html: {'ng-model'=>'project.description', style: 'height: 200px;', class: 'xlarge'}
   .form-actions

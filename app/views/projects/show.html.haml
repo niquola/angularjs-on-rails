@@ -1,14 +1,8 @@
-%h3
-  {{project.name}}
-  %a.btn.btn-mini(ng-href="/projects/{{project.id}}/edit") Edit
-  %small {{project.description}}
+.page-header
+  %h1
+    {{project.name}}
+    %a.btn.btn-mini(ng-href="/projects/{{project.id}}/edit") Edit
+    %small {{project.description}}
 
-%ul.nav.nav-tabs
-  %li.active
-    %a(href="/projects/{{project.id}}") Dashboard
-  %li
-    %a(href="/projects/{{project.id}}/issues") Issues
-  %li
-    %a(href="/projects/{{project.id}}/roadmap") Roadmap
-
-.details(ui-view="pane")
+= render '/shared/project_tabs'
+%h3 Here goes some statistic

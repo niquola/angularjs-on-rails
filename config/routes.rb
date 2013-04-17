@@ -11,8 +11,5 @@ AngularOnRails::Application.routes.draw do
   resources :projects do
     resources :issues
   end
-
-  resources :entries
-
   root :to => 'feeds#index'
 end

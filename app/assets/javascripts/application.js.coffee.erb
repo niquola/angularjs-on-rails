@@ -13,81 +13,39 @@
 #= require jquery
 #= require bootstrap
 #= require angular
-#= require angular-ui
-#= require angular-ui-states
 #= require angular-resource
-#= require angular-resource
-#= require ui-bootstrap-0.2.0
-#= require ui-bootstrap-tpls-0.2.0
 #= require_self
 #= require_tree .
 
-window.myapp = angular
-  .module 'myapp',['ui.compat','ui.router', 'ngResource'], ($stateProvider ,$locationProvider, $urlRouterProvider)->
-    $stateProvider
-      .state 'feeds',
-        url: '/feeds'
-        views:
-          'side':
-            controller: 'FeedsCnt'
-            templateUrl: '/feeds.ng'
-      .state 'feeds/:id',
-        url: '/feeds/:id'
-        views:
-          'side':
-            controller: 'FeedsCnt'
-            templateUrl: '/feeds.ng'
-          '':
-            controller: 'FeedCnt'
-            templateUrl: '/feeds/show.ng'
-      .state 'projects',
-        url: '/projects'
-        views:
-          '':
-            controller: 'ProjectsCnt'
-            templateUrl: '/projects.ng'
-      .state 'projects/new',
-        url: '/projects/new',
-        views:
-          'side':
-            controller: 'ProjectsCnt'
-            templateUrl: '/projects.ng'
-          '':
-            controller: 'ProjectFormCnt'
-            templateUrl: '/projects/new.ng'
-      .state 'projects/:id',
-        url: '/projects/:id',
-        views:
-          'side':
-            controller: 'ProjectsCnt'
-            templateUrl: '/projects.ng'
-          '':
-            controller: 'ProjectCnt'
-            templateUrl: '/projects/show.ng'
-      .state 'projects/:id/edit',
-        url: '/projects/:id/edit'
-        views:
-          'side':
-            controller: 'ProjectsCnt'
-            templateUrl: '/projects.ng'
-          '':
-            controller: 'ProjectFormCnt'
-            templateUrl: '/projects/edit.ng'
-      .state 'projects/:id/issues',
-        url: '/projects/:id/issues'
-        views:
-          'side':
-            controller: 'ProjectsCnt'
-            templateUrl: '/projects.ng'
-          '':
-            controller: 'ProjectCnt'
-            templateUrl: '/projects/show.ng'
-          'pane':
-            controller: 'IssuesCnt'
-            templateUrl: '/issues.ng'
+app = angular
+  .module 'myapp',['ngResource'], ($routeProvider, $locationProvider)->
+    $routeProvider
+      .when '/projects',
+        templateUrl: '/projects.ng'
+        controller: 'ProjectsCnt'
+      .when '/projects/new',
+        templateUrl: '/projects/new.ng'
+        controller: 'ProjectFormCnt'
+      .when '/projects/:id',
+        templateUrl: '/projects/show.ng'
+        controller: 'ProjectDetailsCnt'
+      .when '/projects/:id/edit',
+        templateUrl: '/projects/edit.ng'
+        controller: 'ProjectFormCnt'
+      .when '/projects/:project_id/issues',
+        templateUrl: '/issues.ng'
+        controller: 'IssuesCnt'
+      .when '/projects/:project_id/issues/new',
+        templateUrl: '/issues/new.ng'
+        controller: 'IssueFormCnt'
 
     $locationProvider.html5Mode(true)
 
-  .run ($rootScope,   $state,   $stateParams)->
-    $rootScope.$state = $state
-    $rootScope.$stateParams = $stateParams
+app.config [ '$httpProvider', ($httpProvider) ->
+  token= $('meta[name="csrf-token"]').attr('content')
+  commonHeaders = $httpProvider.defaults.headers.common
+  commonHeaders[ 'X-CSRF-TOKEN' ] = token
+  commonHeaders['Accept'] = 'application/json'
+]
+
+window.app = app
