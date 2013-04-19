@@ -3,9 +3,14 @@
     'ng-submit'=>'submit()',
     onsubmit: 'return false' } do |f|
   = f.error_notification
-  = f.input :name, input_html: {'ng-model'=>'issue.name', class: 'xlarge'}
-  = f.input :tracker, input_html: {'ng-model' => 'issue.tracker', class: 'xlarge'}
-  = f.input :description, 'ng-model'=>'issue.description',
+  = f.input :title,
+    input_html: {'ng-model'=>'issue.title', class: 'xlarge'}
+  = f.input :tracker,
+    input_html: {'ng-model' => 'issue.tracker', class: 'xlarge'}
+  = f.input :status,
+    input_html: {'ng-model' => 'issue.status', class: 'xlarge'}
+  = f.input :description,
+    'ng-model'=>'issue.description',
     as: :text,
     input_html: {'ng-model'=>'issue.description', style: 'height: 200px;', class: 'xlarge'}
   .form-actions

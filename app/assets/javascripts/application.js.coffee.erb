@@ -15,6 +15,7 @@
 #= require angular
 #= require angular-resource
 #= require_self
+#= require_directory ./directives
 #= require_tree .
 
 app = angular
@@ -38,6 +39,9 @@ app = angular
       .when '/projects/:project_id/issues/new',
         templateUrl: '/issues/new.ng'
         controller: 'IssueFormCnt'
+      .when '/projects/:project_id/issues/:id',
+        templateUrl: '/issues/show.ng'
+        controller: 'IssueDetailsCnt'
 
     $locationProvider.html5Mode(true)
 

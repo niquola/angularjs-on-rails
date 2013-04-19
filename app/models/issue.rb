@@ -1,3 +1,3 @@
 class Issue < ActiveRecord::Base
-  attr_accessible :description, :title, :tracker
+  belongs_to :project
 end

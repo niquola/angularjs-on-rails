@@ -18,7 +18,6 @@ window.app.controller 'ProjectFormCnt', ($scope, $routeParams, $location, Projec
         $location.path(redirect_url, id: project.id)
     else
       Project.create project, (data)->
-        console.log(data)
         $location.path(redirect_url, id: data.id)
 
 

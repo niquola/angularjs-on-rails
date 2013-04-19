@@ -1,7 +1,11 @@
+.page-header
+  %h1
+    {{project.name}}
+    %a.btn.btn-mini(ng-href="/projects/{{project.id}}/edit") Edit
+    %small {{project.description}}
+
 %ul.nav.nav-tabs
-  %li.active
-    %a(href="/projects/{{project.id}}") Dashboard
-  %li
-    %a(href="/projects/{{project.id}}/issues") Issues
-  %li
-    %a(href="/projects/{{project.id}}/roadmap") Roadmap
+  %activetab(href="/projects/{{project.id}}") Dashboard
+  %activetab(href="/projects/{{project.id}}/issues") Issues
+  %activetab(href="/projects/{{project.id}}/issues/new") New Issues
+  %activetab(href="/projects/{{project.id}}/roadmap") Roadmap

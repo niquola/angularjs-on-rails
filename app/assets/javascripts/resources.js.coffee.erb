@@ -10,7 +10,7 @@ app.factory 'Project', ($resource)->
     'preview': {method:'GET', params: {collection: 'preview'}},
     'delete': {method:'DELETE'}
 
-app.factory 'Issues', ($resource)->
+app.factory 'Issue', ($resource)->
   $resource '<%= url.project_issues_path(project_id: ':project_id') %>/:collection:id/:member',
     {project_id: '@project_id', id: '@id', collection: '@collection', member: '@member'},
     'get':    {method:'GET'},

@@ -1,10 +1,28 @@
 <% url = AngularOnRails::Application.routes.url_helpers %>
 
-window.app.controller 'IssuesCnt', ($scope, $routeParams, Project, Issues)->
+window.app.controller 'IssuesCnt', ($scope, $routeParams, Project, Issue)->
   project_id = $routeParams.project_id
   $scope.project = Project.get(id: project_id)
-  $scope.issues = Issues.query(project_id: project_id)
+  $scope.issues = Issue.query(project_id: project_id)
 
-window.app.controller 'IssueFormCnt', ($scope, $routeParams, Project, Issues)->
+window.app.controller 'IssueFormCnt', ($scope, $routeParams, $location, Project, Issue)->
+  $scope.issue = {
+    title: 'Test'
+    tracker: 'Test'
+    status: 'Critical'
+    description: 'Ups'
+  }
   project_id = $routeParams.project_id
-  $scope.project = Project.get(id: project_id)
+  project = $scope.project = Project.get(id: project_id)
+  $scope.submit = ()->
+    issue = $scope.issue
+    if issue.id
+      puts 'nop'
+    else
+      params = {issue: issue, project_id: project.id}
+      Issue.create params, (data)->
+        $location.path("/projects/#{project.id}/issues")
+
+window.app.controller 'IssueDetailsCnt', ($scope, $routeParams, Project, Issue)->
+  $scope.project = Project.get(id: $routeParams.project_id)
+  $scope.issue = Issue.get(project_id: $routeParams.project_id, id: $routeParams.id)

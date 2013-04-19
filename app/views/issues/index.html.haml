@@ -1,15 +1,18 @@
 = render '/shared/project_tabs'
 
-= link_to 'Add Issue', '/projects/{{project.id}}/issues/new', class: 'button'
 %table.table
   %thead
     %tr
+      %th #
       %th Title
+      %th Status
       %th Created at
       %th Updated at
   %tr(ng-repeat="issue in issues")
+    %td \#{{issue.id}}
     %td
-      %a(href="/projects/{{project.id}}/issues/{{issue.id}}") {{issue.name}}
+      %a(href="/projects/{{project.id}}/issues/{{issue.id}}") {{issue.title}}
+    %td {{issue.status}}
     %td {{issue.updated_at | date}}
     %td {{issue.created_at | date}}
 
