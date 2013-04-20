@@ -1,0 +1,30 @@
+angular.module('myapp')
+  .config ($routeProvider, $locationProvider)->
+    $routeProvider
+      .when '/projects',
+        templateUrl: '/projects.ng'
+        controller: 'ProjectsCnt'
+      .when '/projects/new',
+        templateUrl: '/projects/new.ng'
+        controller: 'ProjectFormCnt'
+      .when '/projects/:id',
+        templateUrl: '/projects/show.ng'
+        controller: 'ProjectDetailsCnt'
+      .when '/projects/:id/edit',
+        templateUrl: '/projects/edit.ng'
+        controller: 'ProjectFormCnt'
+      .when '/projects/:project_id/issues',
+        templateUrl: '/issues.ng'
+        controller: 'IssuesCnt'
+      .when '/projects/:project_id/issues/new',
+        templateUrl: '/issues/new.ng'
+        controller: 'IssueFormCnt'
+      .when '/projects/:project_id/issues/:id/edit',
+        templateUrl: '/issues/edit.ng'
+        controller: 'IssueFormCnt'
+      .when '/projects/:project_id/issues/:id',
+        templateUrl: '/issues/show.ng'
+        controller: 'IssueDetailsCnt'
+
+    $locationProvider.html5Mode(true)
+

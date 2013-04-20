@@ -18,34 +18,9 @@
 #= require_directory ./directives
 #= require_tree .
 
-app = angular
-  .module 'myapp',['ngResource'], ($routeProvider, $locationProvider)->
-    $routeProvider
-      .when '/projects',
-        templateUrl: '/projects.ng'
-        controller: 'ProjectsCnt'
-      .when '/projects/new',
-        templateUrl: '/projects/new.ng'
-        controller: 'ProjectFormCnt'
-      .when '/projects/:id',
-        templateUrl: '/projects/show.ng'
-        controller: 'ProjectDetailsCnt'
-      .when '/projects/:id/edit',
-        templateUrl: '/projects/edit.ng'
-        controller: 'ProjectFormCnt'
-      .when '/projects/:project_id/issues',
-        templateUrl: '/issues.ng'
-        controller: 'IssuesCnt'
-      .when '/projects/:project_id/issues/new',
-        templateUrl: '/issues/new.ng'
-        controller: 'IssueFormCnt'
-      .when '/projects/:project_id/issues/:id',
-        templateUrl: '/issues/show.ng'
-        controller: 'IssueDetailsCnt'
+app = angular.module('myapp',['ngResource'])
 
-    $locationProvider.html5Mode(true)
-
-app.config [ '$httpProvider', ($httpProvider) ->
+app.config ['$httpProvider', ($httpProvider) ->
   token= $('meta[name="csrf-token"]').attr('content')
   commonHeaders = $httpProvider.defaults.headers.common
   commonHeaders[ 'X-CSRF-TOKEN' ] = token

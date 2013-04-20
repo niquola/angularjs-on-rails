@@ -15,4 +15,4 @@
     input_html: {'ng-model'=>'issue.description', style: 'height: 200px;', class: 'xlarge'}
   .form-actions
     = f.button :submit
-    %a(href="/projects/{{project.id}}/issues") Cancel
+    %a(href="/projects/{{project.id}}/issues/{{issue.id}}") Cancel

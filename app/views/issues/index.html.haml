@@ -5,6 +5,7 @@
     %tr
       %th #
       %th Title
+      %th Actions
       %th Status
       %th Created at
       %th Updated at
@@ -12,7 +13,8 @@
     %td \#{{issue.id}}
     %td
       %a(href="/projects/{{project.id}}/issues/{{issue.id}}") {{issue.title}}
+    %td
+      %a.btn.btn-mini(href="/projects/{{project.id}}/issues/{{issue.id}}/edit") edit
     %td {{issue.status}}
     %td {{issue.updated_at | date}}
     %td {{issue.created_at | date}}
-

@@ -15,7 +15,6 @@ app.factory 'Issue', ($resource)->
     {project_id: '@project_id', id: '@id', collection: '@collection', member: '@member'},
     'get':    {method:'GET'},
     'save':   {method:'PUT'},
-    'create':   {method:'POST'},
+    'create': {method:'POST'},
     'query':  {method:'GET', isArray:true},
-    'preview': {method:'GET', params: {collection: 'preview'}},
     'delete': {method:'DELETE'}

@@ -6,18 +6,17 @@ window.app.controller 'IssuesCnt', ($scope, $routeParams, Project, Issue)->
   $scope.issues = Issue.query(project_id: project_id)
 
 window.app.controller 'IssueFormCnt', ($scope, $routeParams, $location, Project, Issue)->
-  $scope.issue = {
-    title: 'Test'
-    tracker: 'Test'
-    status: 'Critical'
-    description: 'Ups'
-  }
   project_id = $routeParams.project_id
   project = $scope.project = Project.get(id: project_id)
+
+  if id = $routeParams.id
+    $scope.issue = Issue
+      .get(project_id: project_id, id: id)
+
   $scope.submit = ()->
     issue = $scope.issue
     if issue.id
-      puts 'nop'
+      alert('Not implemented yet')
     else
       params = {issue: issue, project_id: project.id}
       Issue.create params, (data)->
