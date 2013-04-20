@@ -1,11 +1,21 @@
 <% url = AngularOnRails::Application.routes.url_helpers %>
+
+
+#TODO: create rails convention resource provider
+
+prefixWithEntity = (name)->
+  (data, headers)->
+    params = {}
+    params[name] = data
+    angular.toJson(params)
+
 app = window.app
 app.factory 'Project', ($resource)->
   $resource '<%= url.projects_path %>/:collection:id/:member',
     {id: '@id', collection: '@collection', member: '@member'},
     'get':    {method:'GET'},
-    'save':   {method:'PUT'},
-    'create':   {method:'POST'},
+    'save':   {method:'PUT', transformRequest: prefixWithEntity('project')},
+    'create':   {method:'POST', transformRequest: prefixWithEntity('project')},
     'query':  {method:'GET', isArray:true},
     'preview': {method:'GET', params: {collection: 'preview'}},
     'delete': {method:'DELETE'}
@@ -14,7 +24,8 @@ app.factory 'Issue', ($resource)->
   $resource '<%= url.project_issues_path(project_id: ':project_id') %>/:collection:id/:member',
     {project_id: '@project_id', id: '@id', collection: '@collection', member: '@member'},
     'get':    {method:'GET'},
-    'save':   {method:'PUT'},
+    'create': {method:'POST', transformRequest: prefixWithEntity('issue')},
+    'save':   {method:'PUT', transformRequest: prefixWithEntity('issue')},
     'create': {method:'POST'},
     'query':  {method:'GET', isArray:true},
     'delete': {method:'DELETE'}

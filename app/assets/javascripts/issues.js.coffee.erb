@@ -16,11 +16,15 @@ window.app.controller 'IssueFormCnt', ($scope, $routeParams, $location, Project,
   $scope.submit = ()->
     issue = $scope.issue
     if issue.id
-      alert('Not implemented yet')
+      issue.$save (data)->
+        issue = $scope.issue = data
+        unless issue.errors
+          $location.path("/projects/#{project.id}/issues")
     else
-      params = {issue: issue, project_id: project.id}
-      Issue.create params, (data)->
-        $location.path("/projects/#{project.id}/issues")
+      issue.project_id = project.id
+      Issue.create issue, (data)->
+        unless data.errors
+          $location.path("/projects/#{project.id}/issues")
 
 window.app.controller 'IssueDetailsCnt', ($scope, $routeParams, Project, Issue)->
   $scope.project = Project.get(id: $routeParams.project_id)

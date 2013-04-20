@@ -13,9 +13,9 @@ window.app.controller 'ProjectFormCnt', ($scope, $routeParams, $location, Projec
     redirect_url = '<%= url.project_path(id: ":id") %>'
     redirect_url = redirect_url.replace(':id', project.id || '')
     if project.id
-      project.$save (data)->
-        console.log(data)
-        $location.path(redirect_url, id: project.id)
+      project.$save (project)->
+        unless project.errors
+          $location.path(redirect_url, id: project.id)
     else
       Project.create project, (data)->
         $location.path(redirect_url, id: data.id)
