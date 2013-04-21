@@ -4,5 +4,5 @@ AngularOnRails::Application.routes.draw do
     resources :issues
   end
   resources :issues
-  root :to => 'feeds#index'
+  root :to => 'projects#index'
 end

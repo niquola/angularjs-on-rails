@@ -7,17 +7,24 @@ window.app.controller 'ProjectDetailsCnt', ($scope, $routeParams, Project)->
   $scope.project = Project.get(id: $routeParams.id)
 
 window.app.controller 'ProjectFormCnt', ($scope, $routeParams, $location, Project)->
-  $scope.project = Project.get(id: $routeParams.id) if $routeParams.id
+  if $routeParams.id
+    $scope.project = Project.get(id: $routeParams.id)
+  else
+    $scope.project = {}
   $scope.submit = ()->
     project = $scope.project
     redirect_url = '<%= url.project_path(id: ":id") %>'
     redirect_url = redirect_url.replace(':id', project.id || '')
+
+    saved = (project)->
+      $location.path(redirect_url, id: project.id)
+
+    errors = (responce)->
+      $scope.project.errors = responce.data.errors
+
     if project.id
-      project.$save (project)->
-        unless project.errors
-          $location.path(redirect_url, id: project.id)
+      project.$save(project, saved, errors)
     else
-      Project.create project, (data)->
-        $location.path(redirect_url, id: data.id)
+      Project.create(project, saved, errors)
 
 

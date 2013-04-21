@@ -3,8 +3,15 @@
     'ng-submit'=>'submit()',
     onsubmit: 'return false' } do |f|
   = f.error_notification
-  = f.input :name, input_html: {'ng-model'=>'project.name', class: 'xlarge'}
-  = f.input :description, 'ng-model'=>'project.description',
+  .alert.alert-danger(ng-show="project.errors")
+    %h4 There are some errors
+    %ul
+      %li(ng-repeat="(attr, err) in project.errors")
+        %b {{attr}}
+        {{err.join(', ')}}
+  = f.input :name,
+    input_html: {'ng-model'=>'project.name', class: 'xlarge'}
+  = f.input :description,
     as: :text,
     input_html: {'ng-model'=>'project.description', style: 'height: 200px;', class: 'xlarge'}
   .form-actions
