@@ -13,26 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130416211426) do
 
-  create_table "entries", :force => true do |t|
-    t.integer  "feed_id"
-    t.string   "url"
-    t.datetime "published"
-    t.string   "summary"
-    t.string   "title"
-    t.string   "entry_id"
-  end
-
-  create_table "feeds", :force => true do |t|
-    t.string   "title"
-    t.string   "url"
-    t.string   "etag"
-    t.text     "description"
-    t.string   "feed_url"
-    t.datetime "last_modified"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
   create_table "issues", :force => true do |t|
     t.integer  "project_id"
     t.string   "title"

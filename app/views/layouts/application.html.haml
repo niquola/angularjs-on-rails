@@ -8,16 +8,17 @@
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="/") Reedmine
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Projects", projects_path
+          %a.navbar-brand{:href => "/"} Angular on rails
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li= link_to "Projects", projects_path
+            %li= link_to "Slides", slides_path
     .container(ng-view)
     = javascript_include_tag "application"

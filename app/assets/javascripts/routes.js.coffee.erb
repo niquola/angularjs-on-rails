@@ -1,6 +1,26 @@
+camelize = (input) ->
+  pieces = input.split(/[\W_-]/)
+  each(pieces, capitalize).join("")
+
+capitalize = (input) ->
+  input.charAt(0).toUpperCase() + input.slice(1)
+
 angular.module('myapp')
   .config ($routeProvider, $locationProvider)->
-    $routeProvider
+    routes = $routeProvider
+    resources = (name)->
+      routes = routes
+        .when "/#{name}",
+          templateUrl: "/#{name}.ng"
+          controller: "/#{capitalize(name)}Cnt"
+        .when "/#{name}/:id",
+          templateUrl: "/#{name}/show.ng"
+          controller: "/#{capitalize(name)}Cnt"
+
+    resources "slides"
+    resources "projects"
+
+    routes
       .when '/projects',
         templateUrl: '/projects.ng'
         controller: 'ProjectsCnt'
