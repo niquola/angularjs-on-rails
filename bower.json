@@ -2,7 +2,7 @@
   "dependencies": {
     "bootstrap": "3.0.0",
     "jquery": "2.0.3",
-    "angular": "1.0.8",
+    "angular": "1.2.0-rc.1",
     "angular-resource": "1.0.8"
   },
   "name": "angular on rails",
