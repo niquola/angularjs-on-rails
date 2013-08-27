@@ -4,6 +4,8 @@ Angularjs and Rails integration sandbox
 
 == Concerns
 
+* Partial angular applicaton
+* Manage assets thro bower (https://github.com/bower/bower)
 * Rails & Angularjs routes integration
 * Rails & Angularjs views integration
 * Helperes & Angularjs integration
@@ -22,7 +24,9 @@ Use rails metainformation for angularjs routes generation
 
 == Installation
 
+# install nodejs and bower
+
 git clone git://github.com/niquola/angularjs-on-rails.git
 cd angularjs-on-rails
 bundle install
-rake db:create db:migrate db:seed
+bower install

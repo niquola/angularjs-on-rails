@@ -1,0 +1,2 @@
+module WellcomeHelper
+end
