@@ -4,29 +4,18 @@ Angularjs and Rails integration sandbox
 
 == Concerns
 
-* Partial angular applicaton
-* Manage assets thro bower (https://github.com/bower/bower)
+* Partial angular applicaton (means part of application is just a pure rails)
+* Manage assets by bower (https://github.com/bower/bower)
 * Rails & Angularjs routes integration
-* Rails & Angularjs views integration
-* Helperes & Angularjs integration
-* CRUD example
-
-== Results
-
-=== Rails & Angularjs views
-
-Double templates: rails make templates for angularjs
-
-=== Rails & Angularjs routes
-
-Use rails metainformation for angularjs routes generation
 
 
 == Installation
 
+```bash
 # install nodejs and bower
 
 git clone git://github.com/niquola/angularjs-on-rails.git
 cd angularjs-on-rails
 bundle install
 bower install
+```
