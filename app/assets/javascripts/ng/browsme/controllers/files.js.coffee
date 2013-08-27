@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 window.app.controller 'FilesCnt', ($scope, File)->
-  console.log('here')
   $scope.files = File.query()
 
 window.app.controller 'FilesShowCnt', ($scope, $location, File)->

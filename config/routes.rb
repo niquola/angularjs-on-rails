@@ -1,6 +1,9 @@
 AngularOnRails::Application.routes.draw do
   root to: "wellcome#index"
+  get 'wellcome' => 'wellcome#index'
+  get 'wellcome/details' => 'wellcome#details'
   get ':controller(/:action).ng', format: 'ng'
-  get "files/*path" => 'files#show', format: false
+
   resources :files
+  get 'files/*id' => 'files#show'
 end

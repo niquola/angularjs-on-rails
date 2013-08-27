@@ -1,6 +1,5 @@
 window.app
   .config ($routeProvider, $locationProvider)->
-
     $routeProvider
       .when "/files",
         templateUrl: "/files.ng"
@@ -8,7 +7,6 @@ window.app
       .otherwise
         templateUrl: "/files/show.ng"
         controller: "FilesShowCnt"
-
 
     $locationProvider.html5Mode(true)
 

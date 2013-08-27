@@ -19,5 +19,8 @@
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li= link_to "Plain rails", root_path
-    .container= yield
+            %li= link_to "NG-application", files_path
+    .container= content_for?(:content) ? yield(:content) : yield
     = javascript_include_tag "application"
+    - if content_for?(:js)
+      = yield(:js)

@@ -12,11 +12,13 @@ class BrowseFilesUseCase
     file = File.join(path, id)
 
     unless File.directory?(file)
-      { name: id,
+      { name: File.basename(id),
+	path: id,
 	type: 'file',
 	content: File.read(file) }
     else
-      { name: id,
+      { path: id,
+	name: File.basename(id),
 	type: 'directory',
 	files: files_list(file) }
     end
@@ -26,7 +28,11 @@ class BrowseFilesUseCase
 
   def files_list(dir)
     Dir["#{dir}/*"].map do |file|
-      {name: file.sub("#{path}/", ''), isdirectory: File.directory?(file)}
+      {
+	name: File.basename(file),
+	path: file.sub("#{path}/", ''),
+	isdirectory: File.directory?(file),
+      }
     end.sort_by do |i|
       (i[:isdirectory] ? 'a' : 'b') + i[:name]
     end

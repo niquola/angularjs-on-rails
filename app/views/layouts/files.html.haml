@@ -1,0 +1,7 @@
+= content_for :content do
+  %div(lang= "en" ng-app= 'myapp' ng-view)
+
+= content_for :js do
+  = javascript_include_tag "ng/browsme/app"
+
+= render template: "layouts/application"

@@ -1,6 +1,8 @@
 .page-header
-  %h1 {{file.name}}
+  %h1 {{file.path}}
 
 %div(ng-switch="file.type")
   %pre(ng-switch-when="file") {{file.content}}
-  %div(ng-switch-when="directory")= render partial: 'grid', locals: { expr: 'file in file.files'}
+  %div(ng-switch-when="directory")
+    = render partial: 'grid',
+      locals: { expr: 'file in file.files'}
