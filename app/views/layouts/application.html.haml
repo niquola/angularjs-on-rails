@@ -18,7 +18,6 @@
           %a.navbar-brand{:href => "/"} Angular on rails
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li= link_to "Projects", projects_path
-            %li= link_to "Slides", slides_path
+            %li= link_to "Browse", files_path
     .container(ng-view)
     = javascript_include_tag "application"

@@ -1,0 +1,4 @@
+# <% url = AngularOnRails::Application.routes.url_helpers %>
+window.app
+  .factory 'File', ($resource)->
+    $resource '<%= url.files_path %>/:id'

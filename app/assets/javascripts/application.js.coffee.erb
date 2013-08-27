@@ -15,8 +15,11 @@
 #= require angular
 #= require angular-resource
 #= require_self
+#= require_directory ./services
 #= require_directory ./directives
-#= require_tree .
+#= require_directory ./resources
+#= require_directory ./controllers
+#= require_directory .
 
 app = angular.module('myapp',['ngResource'])
 

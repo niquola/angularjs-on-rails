@@ -1,50 +1,14 @@
-camelize = (input) ->
-  pieces = input.split(/[\W_-]/)
-  each(pieces, capitalize).join("")
-
-capitalize = (input) ->
-  input.charAt(0).toUpperCase() + input.slice(1)
-
-angular.module('myapp')
+window.app
   .config ($routeProvider, $locationProvider)->
-    routes = $routeProvider
-    resources = (name)->
-      routes = routes
-        .when "/#{name}",
-          templateUrl: "/#{name}.ng"
-          controller: "/#{capitalize(name)}Cnt"
-        .when "/#{name}/:id",
-          templateUrl: "/#{name}/show.ng"
-          controller: "/#{capitalize(name)}Cnt"
 
-    resources "slides"
-    resources "projects"
+    $routeProvider
+      .when "/files",
+        templateUrl: "/files.ng"
+        controller: "FilesCnt"
+      .otherwise
+        templateUrl: "/files/show.ng"
+        controller: "FilesShowCnt"
 
-    routes
-      .when '/projects',
-        templateUrl: '/projects.ng'
-        controller: 'ProjectsCnt'
-      .when '/projects/new',
-        templateUrl: '/projects/new.ng'
-        controller: 'ProjectFormCnt'
-      .when '/projects/:id',
-        templateUrl: '/projects/show.ng'
-        controller: 'ProjectDetailsCnt'
-      .when '/projects/:id/edit',
-        templateUrl: '/projects/edit.ng'
-        controller: 'ProjectFormCnt'
-      .when '/projects/:project_id/issues',
-        templateUrl: '/issues.ng'
-        controller: 'IssuesCnt'
-      .when '/projects/:project_id/issues/new',
-        templateUrl: '/issues/new.ng'
-        controller: 'IssueFormCnt'
-      .when '/projects/:project_id/issues/:id/edit',
-        templateUrl: '/issues/edit.ng'
-        controller: 'IssueFormCnt'
-      .when '/projects/:project_id/issues/:id',
-        templateUrl: '/issues/show.ng'
-        controller: 'IssueDetailsCnt'
 
     $locationProvider.html5Mode(true)
 

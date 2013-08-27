@@ -1,0 +1,6 @@
+%table.table
+  %tr(ng-repeat = expr)
+    %td
+      %span(ng-show="file.isdirectory" style="color:gold; font-size: 1em;") &#128193;
+      %span(ng-hide="file.isdirectory" style="color: gray; font-size: 1em;") &#128025;
+      %a( href = "/files/{{file.name}}") {{file.name}}
